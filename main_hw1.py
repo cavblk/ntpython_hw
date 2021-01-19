@@ -1,4 +1,4 @@
-my_list: list[int] = [7, 8, 9, 2, 3, 1, 4, 10, 5, 6]  # initial list
+my_list = [7, 8, 9, 2, 3, 1, 4, 10, 5, 6]  # initial list
 print(my_list)
 my_list_asc = my_list[::]  # copy of initial list
 my_list_asc.sort()
