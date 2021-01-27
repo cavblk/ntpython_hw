@@ -119,7 +119,7 @@ print('---Revisiting sum to calculate all in one function---\n')
 n = 15
 sr = sum_rec_refact(n)[0]
 sre = sum_rec_refact(n)[1]
-sro = sum_rec_refact(n)[0] - sum_rec_refact(n)[1]
+sro = sr - sre
 print(f'Sum to {n} is {sr}')
 print(f'Sum even numbers to {n} is {sre}')
 print(f'Sum  odd numbers to {n} is {sro}')
@@ -127,7 +127,7 @@ print(f'Sum  odd numbers to {n} is {sro}')
 n = 20
 sr = sum_rec_refact(n)[0]
 sre = sum_rec_refact(n)[1]
-sro = sum_rec_refact(n)[0] - sum_rec_refact(n)[1]
+sro = sr - sre
 print(f'Sum to {n} is {sr}')
 print(f'Sum even numbers to {n} is {sre}')
 print(f'Sum  odd numbers to {n} is {sro}')
