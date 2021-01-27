@@ -49,6 +49,25 @@ def sum_rec_odd(n):
         return n + sum_rec_odd(n - 2)
 
 
+def sum_rec_refact(n):
+    # mind bending at my age :)
+    """Mind bending at my age"""
+    final_oddd_tuple = (1, 1)
+    final_even_tuple = (0, 0)
+    calc_tuple = final_even_tuple  # just to avoid warning
+    if n == 0:
+        return final_even_tuple
+    elif n == 1:
+        return final_oddd_tuple
+    elif n % 2 == 0 and n > 0:
+        list_to_calc = [n + sum_rec_refact(n - 1)[0], n + sum_rec_refact(n - 2)[1]]
+        calc_tuple = tuple(list_to_calc)
+    elif n % 2 == 1 and n > 1:
+        list_to_calc = [n + sum_rec_refact(n - 1)[0], sum_rec_refact(n - 1)[1]]
+        calc_tuple = tuple(list_to_calc)
+    return calc_tuple
+
+
 chiffres = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}  # set
 
 
@@ -56,26 +75,29 @@ def read_keyboard():
     is_int = True
     print("Please enter an int:\n")
     value = input()
-    # Avoid catch exception, check if all chars are digits ; LE: could have been done with isdigit ? :)
-    if value[0] not in chiffres and value[0] not in {'-'}:  # First char can be (-) as well
-        # print(value[0], 'not in range')
+    if len(value) == 0:
         is_int = False
-    for i in range(1, len(value)):
-        # print(value[i])
-        if value[i] not in chiffres:
-            # print(value[i], 'not in range')
+    else:
+        # Avoid catch exception, check if all chars are digits
+        if value[0] not in chiffres and value[0] not in {'-'}:  # First char can be (-) as well
+            # print(value[0], 'not in range')
             is_int = False
+        for c in value[1:]:
+            # print(value[i])
+            if c not in chiffres:
+                # print(value[i], 'not in range')
+                is_int = False
+                break
     if not is_int:
         return 0
-    else:
-        return int(value)
+    return int(value)
 
 
 print('1: ', my_sum_function())
 print('2: ', my_sum_function(1, 5, -3, 'abc', [12, 56, 'cad']))
 print('3: ', my_sum_function(2, 4, 'abc', param_1=2))
 
-n = 9
+n = 15
 sr = sum_rec(n)
 sre = sum_rec_even(n)
 sro = sum_rec_odd(n)
@@ -84,7 +106,7 @@ print(f'Sum even numbers to {n} is {sre}')
 print(f'Sum  odd numbers to {n} is {sro}')
 print(f'Check sro+sre==sr {sro}+{sre}=={sr} {sro + sre == sr}')
 
-n = 10
+n = 20
 sr = sum_rec(n)
 sre = sum_rec_even(n)
 sro = sum_rec_odd(n)
@@ -92,5 +114,22 @@ print(f'Sum to {n} is {sr}')
 print(f'Sum even numbers to {n} is {sre}')
 print(f'Sum  odd numbers to {n} is {sro}')
 print(f'Check sro+sre==sr {sro}+{sre}=={sr} {sro + sre == sr}')
+
+print('---Revisiting sum to calculate all in one function---\n')
+n = 15
+sr = sum_rec_refact(n)[0]
+sre = sum_rec_refact(n)[1]
+sro = sum_rec_refact(n)[0] - sum_rec_refact(n)[1]
+print(f'Sum to {n} is {sr}')
+print(f'Sum even numbers to {n} is {sre}')
+print(f'Sum  odd numbers to {n} is {sro}')
+
+n = 20
+sr = sum_rec_refact(n)[0]
+sre = sum_rec_refact(n)[1]
+sro = sum_rec_refact(n)[0] - sum_rec_refact(n)[1]
+print(f'Sum to {n} is {sr}')
+print(f'Sum even numbers to {n} is {sre}')
+print(f'Sum  odd numbers to {n} is {sro}')
 
 print(read_keyboard())
