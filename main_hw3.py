@@ -89,38 +89,44 @@ def prepare_dir():
 
 def slow_cars(car_dict_list):
     slow_cars_list = [k for k in car_dict_list if int(k.get('hp')) < 120]
-    with open(output_data_dir + os.sep + 'slow_cars.json', 'w') as f:
-        json.dump(slow_cars_list, f, indent=4)
+    slow_cars_list_dict = dict(slow_cars=slow_cars_list)
+    with open(os.path.join(output_data_dir, 'slow_cars.json'), 'w') as f:
+        json.dump(slow_cars_list_dict, f, indent=4)
 
 
 def fast_cars(car_dict_list):
     fast_cars_list = [k for k in car_dict_list if 120 <= int(k.get('hp')) < 180]
-    with open(output_data_dir + os.sep + 'fast_cars.json', 'w') as f:
-        json.dump(fast_cars_list, f, indent=4)
+    fast_cars_list_dict = dict(fast_cars=fast_cars_list)
+    with open(os.path.join(output_data_dir, 'fast_cars.json'), 'w') as f:
+        json.dump(fast_cars_list_dict, f, indent=4)
 
 
 def sport_cars(car_dict_list):
     sport_cars_list = [k for k in car_dict_list if int(k.get('hp')) >= 180]
-    with open(output_data_dir + os.sep + 'sport_cars.json', 'w') as f:
-        json.dump(sport_cars_list, f, indent=4)
+    sport_cars_list_dict = dict(sport_cars=sport_cars_list)
+    with open(os.path.join(output_data_dir, 'sport_cars.json'), 'w') as f:
+        json.dump(sport_cars_list_dict, f, indent=4)
 
 
 def cheap_cars(car_dict_list):
     cheap_cars_list = [k for k in car_dict_list if int(k.get('price')) < 1000]
-    with open(output_data_dir + os.sep + 'cheap_cars.json', 'w') as f:
-        json.dump(cheap_cars_list, f, indent=4)
+    cheap_cars_list_dict = dict(cheap_cars=cheap_cars_list)
+    with open(os.path.join(output_data_dir, 'cheap_cars.json'), 'w') as f:
+        json.dump(cheap_cars_list_dict, f, indent=4)
 
 
 def medium_cars(car_dict_list):
     medium_cars_list = [k for k in car_dict_list if 1000 <= int(k.get('price')) < 5000]
-    with open(output_data_dir + os.sep + 'medium_cars.json', 'w') as f:
-        json.dump(medium_cars_list, f, indent=4)
+    medium_cars_list_dict = dict(medium_cars=medium_cars_list)
+    with open(os.path.join(output_data_dir, 'medium_cars.json'), 'w') as f:
+        json.dump(medium_cars_list_dict, f, indent=4)
 
 
 def expensive_cars(car_dict_list):
     expensive_cars_list = [k for k in car_dict_list if int(k.get('price')) >= 5000]
-    with open(output_data_dir + os.sep + 'expensive_cars.json', 'w') as f:
-        json.dump(expensive_cars_list, f, indent=4)
+    expensive_cars_list_dict = dict(expensive_cars=expensive_cars_list)
+    with open(os.path.join(output_data_dir, 'expensive_cars.json'), 'w') as f:
+        json.dump(expensive_cars_list_dict, f, indent=4)
 
 
 def generate_brand_files(car_dict_list):
@@ -128,8 +134,9 @@ def generate_brand_files(car_dict_list):
     print(brand_set)
     for brand in brand_set:
         brand_cars_list = [k for k in car_dict_list if k.get('brand') == brand]
-        with open(output_data_dir + os.sep + brand + '.json', 'w') as f:
-            json.dump(brand_cars_list, f, indent=4)
+        brand_cars_list_dict = {brand: brand_cars_list}
+        with open(os.path.join(output_data_dir, brand) + '.json', 'w') as f:
+            json.dump(brand_cars_list_dict, f, indent=4)
 
 
 header, cars = get_hdr_cars()
